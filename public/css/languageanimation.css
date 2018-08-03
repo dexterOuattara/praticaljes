@@ -1,0 +1,12 @@
+.animate {
+    font-size: 32px;
+    color: white;
+    text-transform: uppercase;
+}
+
+span {
+    border-right: 5px solid;
+    animation: caret 1s steps(1) infinite;
+    /*padding-left: 5px;*/
+    /*padding-right: 50px;*/
+}
