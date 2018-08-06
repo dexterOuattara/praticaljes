@@ -128,14 +128,15 @@
 
                             <h1> Backend skill</h1>
                             @foreach($project->skills as $skill)
-                                <li class="btn btn-danger">{{$skill->name}}</li>
+                                <li class="btn btn-danger seperate">{{$skill->name}}</li>
                             @endforeach
                         </div>
 
                         <div class="col-md-12">
                             <h1> Reward</h1>
                             @foreach($project->rewards as $reward)
-                                <li class="btn btn-danger">{{$reward->name}}</li>
+                                <li class="btn btn-success">{{$reward->name}} <img style="padding-left: 35px" class="img-responsive" src="/images2/certificate/{{ $reward->description }}" alt="{{ $reward->description }}"></li>
+
                             @endforeach
                         </div>
 

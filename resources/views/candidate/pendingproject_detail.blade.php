@@ -1,5 +1,40 @@
 @extends('layouts.candidate')
 @section('content')
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom fley">
+        <div class="navbar fixed-top fine">
+            <h5>PENDING PROJECT</h5>
+            <nav>
+                @guest
+                    <li><a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a></li>
+                    <li><a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a></li>
+                @else
+                    <li style="list-style-type: none;float: right;">
+                        <img src="/storage/avatars/{{ Auth::user()->avatar }}" width="30" height="30" alt="">
+                    </li>
+                    <li class="nav-item dropdown" style="list-style-type: none;float: right;">
+                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                            {{ Auth::user()->last_name }} {{ Auth::user()->name }}  <span class="caret"></span>
+                        </a>
+
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+                            <a class="dropdown-item" href="{{ route('logout') }}"
+                               onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                {{ __('Logout') }}
+                            </a>
+
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                @csrf
+                            </form>
+                        </div>
+                    </li>
+                    @endguest
+                    </ul>
+
+            </nav>
+        </div>
+    </div>
 
     <div class="right_col" role="main">
         <div class="">
@@ -8,10 +43,8 @@
                 <div class="row">
                     <div class="x_panel">
                         <div class="x_title">
-                            <h2>Recruteur : {{$calltoapply->name}}</h2>
-                            <div class="btn-group" role="group" aria-label="Basic example" style="float:right">
-                                <button type="button" class="btn btn-danger">Time : {{$calltoapply->timeassessment}} minutes</button>
-                            </div>
+                            <h2>Type project : {{$calltoapply->name}}</h2>
+
                             <div class="clearfix"></div>
                         </div>
                     </div>
@@ -19,11 +52,7 @@
                 <div class="row">
                     <div class="col-md-6 col-sm-6 col-xs-12">
                         <div class="x_panel">
-                            <div class="x_title">
-                                <h2>Date Assessment</h2>
 
-                                <div class="clearfix"></div>
-                            </div>
                             <div class="x_content">
                                 <form method="post" action="{{ route('pendingproject_detail.form') }}" enctype="multipart/form-data">
                                     {{ csrf_field() }}
@@ -37,8 +66,7 @@
                                     {{--</div>--}}
 
                                     <div class="form-group">
-
-                                        <input type="hidden" class="form-control" id="store_id" name="store_id" value="{{ $calltoapply->id }}">
+                                        <input type="hidden" class="form-control col-md-2" id="store_id" name="store_id" value="{{ $calltoapply->id }}">
                                     </div>
 
                                     {{--<div class="form-group">--}}
@@ -47,18 +75,18 @@
                                     {{--</div>--}}
                                     <div class="form-group">
                                         <label for="name">level</label>
-                                        <input type="text" class="form-control" id="level" name="level" value="{{$calltoapply->level}}">
+                                        <input type="text" class="form-control" id="level" name="level" value="{{$calltoapply->level}}" readonly>
                                     </div>
                                     <div class="form-group">
-                                        <input type="hidden" class="form-control" id="level" name="framelanguage" value="{{$calltoapply->framelanguage}}">
-                                    </div>
-
-                                    <div class="form-group">
-                                        <input type="hidden" class="form-control" id="description" name="description" value="{{$calltoapply->description}}">
+                                        <input type="hidden" class="form-control" id="level" name="framelanguage" value="{{$calltoapply->framelanguage}}" readonly>
                                     </div>
 
                                     <div class="form-group">
-                                        <input type="hidden" class="form-control" id="timeassessment" name="timeassessment" value="{{$calltoapply->timeassessment}}">
+                                        <input type="hidden" class="form-control" id="description" name="description" value="{{$calltoapply->description}}" readonly>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <input type="hidden" class="form-control" id="timeassessment" name="timeassessment" value="{{$calltoapply->timeassessment}}" readonly>
                                     </div>
 
                                     <div class="form-group">
@@ -66,7 +94,7 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <input type="hidden" class="form-control" id="proglanguage" name="proglanguage" value="{{$calltoapply->proglanguage}}">
+                                        <input type="hidden" class="form-control" id="proglanguage" name="proglanguage" value="{{$calltoapply->proglanguage}}" readonly>
                                     </div>
 
 
@@ -92,12 +120,12 @@
 
                                     <div class="form-group">
                                         <label for="name">Date Assessment</label>
-                                            <input type="text" id="dateassessment" required="required" name="dateassessment" value="{{$calltoapply->dateassessment}}" class="form-control col-md-7 col-xs-12">
+                                            <input type="text" id="dateassessment" required="required" name="dateassessment" value="{{$calltoapply->dateassessment}}" class="form-control col-md-7 col-xs-12" readonly>
                                     </div>
 
                                     <div class="form-group">
                                         <label for="name">End Assessment</label>
-                                            <input type="text" id="endassessment" required="required" name="endassessment" value="{{$calltoapply->endassessment}}" class="form-control col-md-7 col-xs-12">
+                                            <input type="text" id="endassessment" required="required" name="endassessment" value="{{$calltoapply->endassessment}}" class="form-control col-md-7 col-xs-12" readonly>
                                     </div>
 
                                     <div class="form-group">
@@ -144,29 +172,29 @@
                             <div class="x_content">
 
                                 <form class="form-horizontal form-label-left" action="requirement.php">
-
+                                    <div class="form-group">
+                                        <label for="middle-name" class="control-label col-md-5 col-sm-5">PROGRAMMING LANGUAGE</label>
+                                        <div class="col-md-6 col-sm-6">
+                                                <button class="btn btn-success">{{$calltoapply->proglanguage}}</button>
+                                        </div>
+                                    </div>
                                     <div class="form-group">
                                         <label for="middle-name" class="control-label col-md-5 col-sm-5">LANGUAGE FRAMEWORK</label>
                                         <div class="col-md-6 col-sm-6">
-                                            <input id="middle-name2" class="btn btn-danger col-md-7 col-xs-12" type="text" name="framelanguage" value="{{$calltoapply->framelanguage}}" readonly>
+                                            <button class="btn btn-danger">{{$calltoapply->framelanguage}}</button>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="middle-name" class="control-label col-md-5 col-sm-5">FRAMEWORK CSS</label>
                                         <div class="col-md-6 col-sm-6">
-                                            <input id="middle-name2" class="btn btn-primary col-md-7 col-xs-12" type="text" name="framecss" value="{{$calltoapply->framecss}}" readonly>
+                                            <button class="btn btn-primary">{{$calltoapply->framecss}}</button>
                                         </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="middle-name" class="control-label col-md-5 col-sm-5">PROGRAMMING LANGUAGE</label>
-                                        <div class="col-md-6 col-sm-6">
-                                            <input id="middle-name2" class="btn btn-success col-md-7 col-xs-12" type="text" name="proglanguage" value="{{$calltoapply->proglanguage}}" readonly>
-                                        </div>
-                                    </div>
+
                                     <div class="form-group">
                                         <label for="middle-name" class="control-label col-md-5 col-sm-5">VERSION HTML</label>
                                         <div class="col-md-6 col-sm-6">
-                                            <input id="middle-name2" class="btn btn-dark col-md-7 col-xs-12" type="text" value="{{$calltoapply->framehtml}}" readonly>
+                                            <button class="btn btn-dark">{{$calltoapply->framehtml}}</button>
                                         </div>
                                     </div>
                                 </form>

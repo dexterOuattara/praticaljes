@@ -1,5 +1,40 @@
 @extends('layouts.recruter')
 @section('content')
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom fley">
+        <div class="navbar fixed-top fine">
+            <h5>Project library</h5>
+            <nav>
+                @guest
+                    <li><a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a></li>
+                    <li><a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a></li>
+                @else
+                    <li style="list-style-type: none;float: right;">
+                        <img src="/storage/avatars/{{ Auth::user()->avatar }}" width="30" height="30" alt="">
+                    </li>
+                    <li class="nav-item dropdown" style="list-style-type: none;float: right;">
+                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                            {{ Auth::user()->last_name }} {{ Auth::user()->name }}  <span class="caret"></span>
+                        </a>
+
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+                            <a class="dropdown-item" href="{{ route('logout') }}"
+                               onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                {{ __('Logout') }}
+                            </a>
+
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                @csrf
+                            </form>
+                        </div>
+                    </li>
+                    @endguest
+                    </ul>
+
+            </nav>
+        </div>
+    </div>
 
     <div class="right_col" role="main">
         <div class="">
@@ -20,9 +55,10 @@
 
                                     @foreach($dashboards as $dashboard)
 
-                                    <a href="/listassessment/{{$dashboard->store_id}}">
 
-                                    <div class="col-md-55">
+                                    <div class="col-md-2">
+                                        <a href="/listassessment/{{$dashboard->store_id}}">
+
                                         <div class="thumbnail">
                                             <img src="images/languages/{{$dashboard->proglanguage}}.svg" alt="image" />
                                         </div>
@@ -39,12 +75,12 @@
 
 
                                 <a href="/createprojet">
-                                    <div class="col-md-55">
+                                    <div class="col-md-2">
                                         <div class="thumbnail">
                                             <img src="images2/add.png"  alt="...">
                                         </div>
                                         <div class="caption text-center">
-                                            <p>Add Project</p>
+                                            <p class="text-center">Add Project</p>
                                         </div>
                                     </div>
                                 </a>

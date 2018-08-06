@@ -1,60 +1,27 @@
-<br />
+<div class="container-fluid">
+    <div class="row" style="height: 70vmax">
+        <nav class="col-md-2 d-none d-md-block bg-light sidebar" >
+            <div class="row" style="width: 100%">
+                <div class="col-lg-12">
+                    <div>
+                        <a class="brandhome codelnlogo" style="text-decoration: none" href="{{ route('candidate.home') }}">CODELN</a>
+                    </div>
 
-<!-- sidebar menu -->
-<div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
-    <div class="menu_section">
-        <h3>General</h3>
-        <ul class="nav side-menu">
-
-            <li><a  style="color: white" href="{{ route('candidate.home') }}"><i class="fa fa-home"></i>HOME <span class="label label-success pull-right"></span></a></li>
-            <li><a  style="color: white" href="{{ route('candidate.calltoapply') }}"><i class="fa fa-send"></i> CALL TO APPLY <span class="label label-success pull-right"></span></a></li>
-            <li><a  style="color: white" href="{{ route('candidate.pendingproject') }}"><i class="fa fa-code"></i>PENDING PROJECT <span class="label label-success pull-right"></span></a></li>
-            {{--<li><a href="{{ route('candidate.meeting') }}"><i class="fa fa-user"></i> MY MEETING <span class="label label-success pull-right"></span></a></li>--}}
-            <li><a  style="color: white" href="/candidate/myresume"><i class="fa fa-file"></i> MY RESUME <span class="label label-success pull-right">20 % complete</span></a></li>
-
-        </ul>
-    </div>
-
-
-</div>
-
-</div>
-</div>
-
-<!-- top navigation -->
-<div class="top_nav">
-    <div class="nav_menu">
-        <nav>
-            <div class="nav toggle">
-                <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+                </div>
             </div>
-            <ul class="nav navbar-nav navbar-right">
-                <!-- Authentication Links -->
-                @guest
-                    <li><a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a></li>
-                    <li><a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a></li>
-                @else
-                    <li class="nav-item dropdown">
-                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                            {{ Auth::user()->last_name }} {{ Auth::user()->name }}  <span class="caret"></span>
-                        </a>
 
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="{{ route('candidate.logout') }}"
-                               onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                {{ __('Logout') }}
-                            </a>
+            <div class="sidebar-sticky">
 
-                            <form id="logout-form" action="{{ route('candidate.logout') }}" method="POST" style="display: none;">
-                                @csrf
-                            </form>
-                        </div>
-                    </li>
-                @endguest
-            </ul>
+                <ul class="nav side-menu">
 
+                    <li><a   href="{{ route('candidate.home') }}"><i class="fa fa-home"></i>HOME <span class="label label-success pull-right"></span></a></li>
+                    <li><a   href="{{ route('candidate.calltoapply') }}"><i class="fa fa-send"></i> CALL TO APPLY <span class="label label-success pull-right"></span></a></li>
+                    <li><a   href="{{ route('candidate.pendingproject') }}"><i class="fa fa-code"></i>PENDING PROJECT <span class="label label-success pull-right"></span></a></li>
+                    <li><a   href="/candidate/myresume"><i class="fa fa-file"></i> MY RESUME </a></li>
+
+                </ul>
+            </div>
         </nav>
-    </div>
-</div>
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+
 <!-- /top navigation -->

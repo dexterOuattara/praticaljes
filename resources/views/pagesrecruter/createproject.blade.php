@@ -1,76 +1,74 @@
 @extends('layouts.recruter')
 @section('content')
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom fley">
+        <div class="navbar fixed-top fine">
+            <h5>Project library</h5>
+            <nav>
+                @guest
+                    <li><a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a></li>
+                    <li><a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a></li>
+                @else
+                    <li style="list-style-type: none;float: right;">
+                        <img src="/storage/avatars/{{ Auth::user()->avatar }}" width="30" height="30" alt="">
+                    </li>
+                    <li class="nav-item dropdown" style="list-style-type: none;float: right;">
+                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                            {{ Auth::user()->last_name }} {{ Auth::user()->name }}  <span class="caret"></span>
+                        </a>
 
-    <div class="right_col" role="main">
-        <div class="">
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
 
-            <div class="clearfix"></div>
+                            <a class="dropdown-item" href="{{ route('logout') }}"
+                               onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                {{ __('Logout') }}
+                            </a>
 
-            <div class="row">
-
-                <div class="col-md-12 col-sm-12 col-xs-12">
-                    <div class="x_panel">
-                        <div class="x_title">
-                            <h2>PROJECT LIBRARY</h2>
-
-                            <div class="clearfix"></div>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                @csrf
+                            </form>
                         </div>
-                        <div class="x_content">
+                    </li>
+                    @endguest
+                    </ul>
 
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-md-12" style="padding-bottom: 153px">
-                    <div class="form-group pull-right">
-                        <input class="search form-control" placeholder="What you looking for?" type="text">
-                    </div>
-                    <span class="counter pull-right">All items</span>
-                    <table class="table table-hover table-bordered results">
-                        <thead>
-                        <tr>
-                            <th class="col-md-1 text-center">Numero</th>
-                            <th class="col-md-1 text-center">IMAGE</th>
-                            <th class="col-md-2 text-center">TYPE OF PROJECT</th>
-                            <th class="col-md-3 text-center">Project Name</th>
-                            <th class="col-md-2 text-center">DIFFICULTY</th>
-                            <th class="col-md-2 text-center">SEE DETAIL</th>
-                        </tr>
-                        <tr class="warning no-result" style="display: none;">
-                            <td colspan="4"><i class="fa fa-warning"></i> No result</td>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        @if( $projects )
-                            @foreach($projects as $project)
-                                <tr visible="true">
-                                    <th>{{ $loop->iteration }}</th>
-                                    <td class="text-center"><img src="images2/project/{{ $project->image1 }}" alt="" height="42" width="42"></td>
-                                    <td class="text-center">{{ $project->typeassessment->name }}</td>
-                                    <td class="text-center">{{ $project->name }}</td>
-                                    <td class="text-center">{{ $project->level }}</td>
-                                    <td class="text-center">
-                                        <a href="/chooseframelang/{{ $project->id }}"><button type="button" class="btn btn-primary btn-xs">
-                                                <i class="fa fa-file-archive-o"> </i> More details
-                                            </button>
-                                        </a>
-                                    </td>
-                                </tr>
-                            @endforeach
-                        @else
-                            <p class="text-center text-primary">No Posts created Yet!</p>
-                        @endif
-                        </tbody>
-                    </table>
-                </div>
-
-            </div>
-
-
+            </nav>
         </div>
     </div>
+    <div class="row">
+
+
+        @if($projects)
+            <div class="row text-center">
+                @foreach($projects as $project)
+                    <div class="col-lg-4">
+
+                            <img class="card-img-top" height="200px" src="../images2/project/{{$project->image1}}" alt="Card image cap">
+
+                            <div class="card-body">
+
+                                <p class="card-text">{{ $project->name }} <span class="badge badge-primary">Level : {{$project->level}}</span></p>
+                                <p>{{ $project->typeassessment->name }}</p>
+                                <a href="/chooseframelang/{{ $project->id }}" class="btn btn-primary " style="width: 100%;"> View </a>
+                            </div>
+
+                    </div>
+                @endforeach
+            </div>
+        @else
+            <div class="row ">
+                <div class="col-lg-12">
+                    <div class="d-flex justify-content-center">
+                        <div class="alert alert-primary" role="alert" >
+                            Project library empty
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+    @endif
+
+
 
 @stop

@@ -64,17 +64,16 @@ body {
 
 h1, h2, h3, h4, h5, h6 {
 	color:#111111;
-	font-weight:800;
-	margin:0 auto 15px;
 }
 h1 {
-	font-size: 60px;
+	font-size: 40px;
+    font-family: 'Roboto', sans-serif;
 }
 h2 {
 	font-size: 50px;
 }
 h3 {
-	font-size: 40px;
+	font-size: 28px;
 }
 h4 {
 	font-size:32px;
@@ -2162,4 +2161,18 @@ p {
 
 .caracter{
     font-weight: bold;
+}
+
+.intro{
+    padding-top: 200px;
+    font-size: 14px;
+}
+
+.macouleur{
+    background-color: #ecf0f1;
+}
+
+.seperate{
+    padding-top: 5px;
+    padding-bottom: 5px;
 }

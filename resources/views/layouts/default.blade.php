@@ -1,6 +1,9 @@
 <!doctype html>
 <html>
 <head>
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+
     @include('includes.head')
 </head>
 <body id="home">

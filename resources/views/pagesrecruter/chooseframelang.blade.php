@@ -1,5 +1,41 @@
 @extends('layouts.recruter')
 @section('content')
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom fley">
+        <div class="navbar fixed-top fine">
+            <h5>Project library</h5>
+            <nav>
+                @guest
+                    <li><a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a></li>
+                    <li><a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a></li>
+                @else
+                    <li style="list-style-type: none;float: right;">
+                        <img src="/storage/avatars/{{ Auth::user()->avatar }}" width="30" height="30" alt="">
+                    </li>
+                    <li class="nav-item dropdown" style="list-style-type: none;float: right;">
+                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                            {{ Auth::user()->last_name }} {{ Auth::user()->name }}  <span class="caret"></span>
+                        </a>
+
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+                            <a class="dropdown-item" href="{{ route('logout') }}"
+                               onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                {{ __('Logout') }}
+                            </a>
+
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                @csrf
+                            </form>
+                        </div>
+                    </li>
+                    @endguest
+                    </ul>
+
+            </nav>
+        </div>
+    </div>
+
     <div class="right_col" role="main">
         <div class="">
 
@@ -10,7 +46,7 @@
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="x_panel">
                         <div class="x_title">
-                            <h2>Name project :{{$assessment->name}} <small>CUSTOM YOUR FIRST ASSESSMENT </small></h2>
+                            <h2>Name project :{{$assessment->name}} <small style="font-size: 18px">CUSTOM YOUR FIRST ASSESSMENT </small></h2>
 
                             <div class="clearfix"></div>
                         </div>
@@ -33,20 +69,10 @@
                             </div>
 
                             <div class="clearfix"></div>
-                        </div>
-                        <div class="x_content">
-                        <div class="col-me-12">
-                            <div>
-                                <img class="img-responsive" src="../images2/project/{{$assessment->image1}}" height="40px" alt="{{$assessment->image1}}" />
-                                <h1>Description</h1>
-                                <div style="color: black;font-size: 16px">{!! $assessment->description !!}</div>
-                                <h1>Requirement</h1>
-                                <div style="color: black;font-size: 16px">{!! $assessment->requirement1 !!}</div>
-                            </div>
+                            <img class="img-responsive" src="../images2/project/{{$assessment->image1}}" width="600px" alt="{{$assessment->image1}}" />
 
                         </div>
 
-                        </div>
                     </div>
                 </div>
                 <div class="col-md-5 col-sm-5 col-xs-12">
@@ -93,26 +119,26 @@
                                     </select>
                                 </div>
                                     <div class="form-group">
-                                        <label class="control-label col-md-5 col-sm-5 col-xs-12 text-center" for="dateassessment"> Assessment Date <span class="required">*</span>
+                                        <label for="dateassessment"> ASSESSMENT DATE <span class="required">*</span>
                                         </label>
-                                        <div class="col-md-7 col-sm-7 col-xs-12">
-                                            <input type="date" id="DateAssessment" name="dateassessment" class="form-control col-md-7 col-xs-12">
+                                        <div class="col-md-8 col-sm-8 col-xs-12">
+                                            <input type="date" id="DateAssessment" name="dateassessment" class="form-control col-md-7 col-xs-12" required>
                                         </div>
                                     </div>
 
                                     <div class="form-group">
-                                        <label class="control-label col-md-5 col-sm-5 col-xs-12 text-center" for="EndAssessment"> Assessment End <span class="required">*</span>
+                                        <label for="EndAssessment"> ASSESSMENT END <span class="required">*</span>
                                         </label>
-                                        <div class="col-md-7 col-sm-7 col-xs-12">
-                                            <input type="date" id="EndAssessment" name="endassessment" class="form-control col-md-7 col-xs-12">
+                                        <div class="col-md-8 col-sm-8 col-xs-12">
+                                            <input type="date" id="EndAssessment" name="endassessment" class="form-control col-md-7 col-xs-12" required>
                                         </div>
                                     </div>
 
                                     <div class="form-group">
-                                        <label class="control-label col-md-5 col-sm-5 col-xs-12 text-center" for="numberapplicant"> Number Candidate <span class="required">*</span>
+                                        <label class="col-md-8 col-sm-8 col-xs-12" for="numberapplicant"> Number Candidate <span class="required">*</span>
                                         </label>
-                                        <div class="col-md-7 col-sm-7 col-xs-12">
-                                            <input type="int" class="form-control" id="numberapplicant" name="numberapplicant" value="" >
+                                        <div class="col-md-8 col-sm-8 col-xs-12">
+                                            <input type="int"  class="form-control col-md-7 col-xs-12" id="numberapplicant" name="numberapplicant" required >
                                         </div>
                                     </div>
 
@@ -157,6 +183,25 @@
                         </div>
                     </div>
 
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div>
+                        <h3>Description</h3>
+                        <blockquote class="blockquote text-left macouleur">
+                            {!! $assessment->description !!}
+                        </blockquote>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <blockquote>
+                        <h3>Requirement</h3>
+                        <blockquote class="blockquote text-left macouleur">
+                            {!! $assessment->requirement1 !!}
+                        </blockquote>
+                    </div>
                 </div>
             </div>
         </div>
